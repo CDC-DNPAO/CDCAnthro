@@ -48,15 +48,11 @@ mod_waz, mod_haz, mod_bmiz: modified z-scores
 
 ext_bmip and ext_bmiz: extended BMI percentile and z-score
 
-Note: Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi'). 
-
-Use: cdcanthro(data, age, wt, ht, bmi)
+Note: Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi)
 
 Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm
 
-Author(s)
-
-David Freedman
+Author(s): David Freedman
 
 References
 
@@ -69,7 +65,7 @@ Freedman DS, Woo JG, Ogden CL, Xu JH, Cole TJ. Distance and Percent Distance fro
 See Also
 https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
 
-Examples
+### Examples
 
 data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
 
@@ -77,14 +73,13 @@ data$bmi = data$wtk / (data$htc/100)^2;
 
 data = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi);
 
-OR
-
-data = cdcanthro(data, agem, wtk, htc, bmi);
-
 round(data,2)
 
 setDF(data) # to convert to a dataframe
 
+OR data = cdcanthro(data, agem, wtk, htc, bmi);
+
+---------------------
 
 nhanes   # NHANES data (2015/16 and 2017/18)
 
