@@ -7,7 +7,7 @@ Generate z-scores, percentiles, and other metrics for weight, height, and BMI ba
 
 The BMI metrics included z-scores and percentiles base on the growth charts, along with various newer metrics such as extended BMIz, percent of the 50th and 95th percentiles.
 
-Usage
+###Usage
 
 cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi)
 OR
@@ -40,7 +40,7 @@ Return Value
 
 Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a dataframe with 'setDF(output_data)'.
 
-Variables in output:
+####Variables in output:
 
 waz, haz, bmiz: CDC –for-age z-scores for Weight, Height, and BMI
 
