@@ -1,7 +1,7 @@
 ## cdcanthro
 GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC GROWTH CHARTS
 
-**Description
+### Description
 
 Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts. Has a single function, 'anthro'. Requires the package data.table to be installed; library(cdcanthor) will also attach data.table.
 
@@ -15,7 +15,7 @@ cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
 
 ### Do NOT put arguments in quotation marks
 
-Arguments
+Arguments:
 
 data: data.frame or data.table
 
@@ -36,7 +36,7 @@ If age is in days, divide by 30.4375 so that a child who is 3672 days old would 
 
 For additional information on age, see information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
 
-Return Value
+### Return Value
 
 Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a dataframe with 'setDF(output_data)'.
 
@@ -54,7 +54,7 @@ Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts
 
 Author(s): David Freedman
 
-References
+### References
 
 Kuczmarski RJ, Ogden CL, Guo SS, Grummer-Strawn LM, Flegal KM, Mei Z, et al. 2000 CDC Growth Charts for the United States: methods and development. Vital and Health Statistics Series 11, Data from the National Health Survey 2002;11:1–190.
 
