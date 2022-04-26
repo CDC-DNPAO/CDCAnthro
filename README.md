@@ -1,7 +1,7 @@
 ## cdcanthro
 GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC GROWTH CHARTS
 
-Description
+**Description
 
 Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts. Has a single function, 'anthro'. Requires the package data.table to be installed; library(cdcanthor) will also attach data.table.
 
