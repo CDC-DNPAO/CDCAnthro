@@ -1,4 +1,4 @@
-## cdcanthro
+## cdcanthro - CDC ANTHROpometry values
 GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC GROWTH CHARTS
 
 ### Description
