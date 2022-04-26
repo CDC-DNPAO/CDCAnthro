@@ -83,8 +83,8 @@ OR data = cdcanthro(data, agem, wtk, htc, bmi);
 
 nhanes   # NHANES data (2015/16 and 2017/18)
 
-nhanes  = nhanes[!is.na(bmi),] # exclude subjects with missing wt/ht
+nhanes  = nhanes[!is.na(bmi)]  # exclude subjects with missing wt/ht
 
 nhanes$agemos = nhanes$agemos + 0.5   # because agemos is completed number of months
 
-data = cdcanthro(nhanes, age=agemos, wt, ht, bmi)
+data = cdcanthro(nhanes, agemos, wt, ht, bmi)
