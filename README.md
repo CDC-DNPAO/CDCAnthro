@@ -28,11 +28,11 @@ ht: height (cm).
 bmi: BMI, kg/m^2.
 
 ### Details
-Expects 'sex' to be a variable in the dataset. Boys can be coded as 1, b, boy, or M; girls can be coded as 2, g, girl, or F. If your sex values are something else, recode to one of these formats. Weight is in kg, and ht is in cm. BMI is kg/m^2.
+Expects 'sex' to be a variable in the dataset. Can be coded as either 'boys/girls' or 'male/female' or '1/2'.  Character values can be upper or lower case; only the first character is considered.
 
-Age in months should be given as accurately as possible because the function linearly interpolates between ages. If completed number of months is known (e.g., NHANES), add 0.5.
+Age in months should be given as accurately as possible because the function linearly interpolates between ages. If completed number of months is known (e.g., NHANES), add 0.5. If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641.
 
-If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641.
+Weight is in kg, and ht is in cm. BMI is kg/m^2.
 
 For additional information on age, see information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
 
