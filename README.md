@@ -3,12 +3,12 @@ GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC 
 
 ### Description
 
-Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts. Has a single function, 'anthro'. Requires the package data.table to be installed; library(cdcanthor) will also attach data.table.
+Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts. Has a single function, 'cdcanthro'. Requires the package data.table to be installed; library(cdcanthor) will also attach data.table.
 
 The BMI metrics included z-scores and percentiles base on the growth charts, along with various newer metrics such as extended BMIz, percent of the 50th and 95th percentiles.
 
 ### Installation
-Run the following command:
+Run the following command in R:
 
 install.packages(
    'https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.1.tar.gz', repos=NULL
@@ -20,7 +20,8 @@ cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi)
 OR
 cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
 
-### Do NOT put arguments in quotation marks
+### Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi'). 
+### Instead, use cdcanthro(data, age, wt, ht, bmi)
 
 Arguments:
 
@@ -47,7 +48,7 @@ For additional information on age, see information on agemos at https://www.cdc.
 
 Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a dataframe with 'setDF(output_data)'.
 
-####Variables in output:
+#### Variables in output:
 
 waz, haz, bmiz: CDC –for-age z-scores for Weight, Height, and BMI
 
@@ -55,7 +56,6 @@ mod_waz, mod_haz, mod_bmiz: modified z-scores
 
 ext_bmip and ext_bmiz: extended BMI percentile and z-score
 
-Note: Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi)
 
 Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm
 
