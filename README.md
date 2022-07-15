@@ -9,7 +9,10 @@ The BMI metrics included z-scores and percentiles base on the growth charts, alo
 
 ### Installation
 Run the following command:
-install.packages("https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.1.tar.gz",  repos=NULL)
+
+install.packages(
+   'https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.1.tar.gz', repos=NULL
+ )
 
 ### Usage
 
