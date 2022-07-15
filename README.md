@@ -20,8 +20,7 @@ cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi)
 OR
 cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
 
-#### Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi'). 
-## Instead, use cdcanthro(data, age, wt, ht, bmi)
+#### Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi)
 
 Arguments:
 
