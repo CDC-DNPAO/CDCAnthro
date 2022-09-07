@@ -17,7 +17,7 @@ install.packages(
 ### Usage
 
 cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi, all=FALSE)
-# Default for all= is FALSE.  If TRUE, then output all BMI metrics in Wei et al.
+Default for all= is FALSE.  If TRUE, then output all BMI metrics in Wei et al.
 OR
 cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
 
@@ -78,7 +78,7 @@ data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
 
 data$bmi = data$wtk / (data$htc/100)^2;
 
-data = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi);
+data = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, default=FALSE); # if default=TRUE then output all variables in Wei et al. paper
 
 round(data,2)
 
