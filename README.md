@@ -16,8 +16,9 @@ install.packages(
 
 ### Usage
 
-cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi, all=FALSE)
-OR
+cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi, all = FALSE)
+# Default for 'all' is FALSE - see Detailts
+
 cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
 
 #### Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi)
@@ -43,6 +44,8 @@ Weight is in kg, and ht is in cm. BMI is kg/m^2.
 
 For additional information on age, see information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
 
+If all=TRUE, all variables in Wei et al. paper will be output. Default is FALSE
+
 ### Return Value
 
 Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a dataframe with 'setDF(output_data)'.
@@ -55,6 +58,9 @@ mod_waz, mod_haz, mod_bmiz: modified z-scores
 
 ext_bmip and ext_bmiz: extended BMI percentile and z-score
 
+bmip95: BMI expressed as percentage of 95th percentile, 120 percent is lower threshold for severe obeseity
+
+if 'all = TRUE', then output other BMI metrics describe in Wei et al. paper.  Default is FALSE.  These express BMI as distance or percent distance from the median.  If percent of the median is desired, 100 can be added to the values.
 
 Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm
 
