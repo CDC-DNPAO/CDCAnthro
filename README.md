@@ -17,6 +17,7 @@ install.packages(
 ### Usage
 
 cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi, all = FALSE)
+
 Default for 'all' is FALSE - see Detailts
 
 cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
