@@ -5,7 +5,7 @@ GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC 
 
 Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts, BMI metrics proposed at a 2018 meeting, and extended z-scores and percentiles for children with obesity. Has a single function, 'cdcanthro'. Requires the package data.table to be installed; library(cdcanthro) will also attach data.table.
 
-The BMI metrics included z-scores and percentiles base on the growth charts, along with various newer metrics such as extended BMIz, percent of the 50th and 95th percentiles.
+The BMI metrics included z-scores and percentiles base on the growth charts, along with various newer metrics that more accuately characterize BMIs above the CDC 97th percentile. Note that the output variables, bmiz and bmip, are based on a combination of the LMS-based z-scores for children without obesity and extend bmiz and extended bmip for children with obesity.  The LMS-based z-scores/percentiles are named 'original_bmiz' and 'original_bmip'.
 
 ### Installation
 Run the following command in R:
@@ -57,7 +57,7 @@ waz, haz, bmiz: CDC –for-age z-scores for Weight, Height, and BMI
 
 mod_waz, mod_haz, mod_bmiz: modified z-scores
 
-ext_bmip and ext_bmiz: extended BMI percentile and z-score
+bmip and bmiz: These are based on the LMS-method for children without obesity and the 'extended' method for children with obesity.  See the Wei et al. reference for the 'extended' method which is based on modeling high BMIs as a half-normal distribution.
 
 bmip95: BMI expressed as percentage of 95th percentile, 120 percent is lower threshold for severe obeseity
 
