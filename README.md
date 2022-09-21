@@ -45,7 +45,7 @@ Weight is in kg, and ht is in cm. BMI is kg/m^2.
 
 For additional information on age, see information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
 
-If all=TRUE, all variables in Wei et al. paper will be output. Default is FALSE
+If all=TRUE, all variables in Wei et al. paper will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution.  Default is FALSE
 
 ### Return Value
 
