@@ -84,7 +84,7 @@ data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
 
 data$bmi = data$wtk / (data$htc/100)^2;
 
-data = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, default=FALSE); # if default=TRUE then output all variables in Wei et al. paper
+data = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=FALSE); # if default=TRUE then output all variables in Wei et al. paper
 
 round(data,2)
 
@@ -100,4 +100,4 @@ nhanes  = nhanes[!is.na(bmi)]  # exclude subjects with missing wt/ht
 
 nhanes$agemos = nhanes$agemos + 0.5   # because agemos is completed number of months
 
-data = cdcanthro(nhanes, agemos, wt, ht, bmi)
+data = cdcanthro(nhanes, agemos, wt, ht, bmi, all=TRUE)
