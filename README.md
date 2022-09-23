@@ -3,9 +3,9 @@ GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC 
 
 ### Description
 
-Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts, BMI metrics proposed at a 2018 meeting, and extended z-scores and percentiles for children with obesity. Has a single function, 'cdcanthro'. Requires the package data.table to be installed; library(cdcanthro) will also attach data.table.
+Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts, BMI metrics proposed at a 2018 meeting, and extended z-scores and percentiles for children with obesity. It has a single function, 'cdcanthro'. Requires the package data.table to be installed; library(cdcanthro) will attach data.table.
 
-The BMI metrics included z-scores and percentiles base on the growth charts, along with various newer metrics that more accuately characterize BMIs above the CDC 97th percentile. Note that the output variables, bmiz and bmip, are based on a combination of the LMS-based z-scores for children without obesity and extend bmiz and extended bmip for children with obesity.  The LMS-based z-scores/percentiles are named 'original_bmiz' and 'original_bmip'.
+The BMI metrics included z-scores and percentiles based on the growth charts and newer metrics that more accurately characterize BMIs above the CDC 97th percentile. Note that the output variables - bmiz and bmip - are based on a combination of the LMS-based z-scores for children without obesity and extended bmiz and extended bmip for children with obesity.  The LM based z-scores/percentiles are named 'original_bmiz' and 'original_bmip'.
 
 ### Installation
 Run the following command in R:
@@ -18,17 +18,17 @@ install.packages(
 
 cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi, all = FALSE)
 
-Default for 'all' is FALSE - see Detailts
+The default for 'all' is FALSE - See Details
 
 cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
 
-#### Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi)
+#### Do NOT put arguments in quotation marks, such as cdcanthro(data, 'age', 'wt', 'ht', 'bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi)
 
 Arguments:
 
-data: data.frame or data.table
+data: data frame or data.table
 
-age: age in months specified as accuately as possible.
+age: age in months specified as accurately as possible.
 
 wt: weight (kg).
 
@@ -39,17 +39,17 @@ bmi: BMI, kg/m^2.
 ### Details
 Expects 'sex' to be a variable in the dataset. Can be coded as either 'boys/girls' or 'male/female' or '1/2'.  Character values can be upper or lower case; only the first character is considered.
 
-Age in months should be given as accurately as possible because the function linearly interpolates between ages. If completed number of months is known (e.g., NHANES), add 0.5. If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641.
+Age in months should be given as accurately as possible because the function linearly interpolates between ages. If the completed number of months is known (e.g., NHANES), add 0.5. If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641.
 
 Weight is in kg, and ht is in cm. BMI is kg/m^2.
 
 For additional information on age, see information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
 
-If all=TRUE, all variables in Wei et al. paper will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution.  Default is FALSE
+If all=TRUE, all variables in Freedman et al. paper will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution. Default is FALSE
 
 ### Return Value
 
-Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a dataframe with 'setDF(output_data)'.
+Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a data frame with 'setDF(output_data)'.
 
 #### Variables in output:
 
@@ -57,11 +57,11 @@ waz, haz, bmiz: CDC –for-age z-scores for Weight, Height, and BMI
 
 mod_waz, mod_haz, mod_bmiz: modified z-scores
 
-bmip and bmiz: These are based on the LMS-method for children without obesity and the 'extended' method for children with obesity.  See the Wei et al. reference for the 'extended' method which is based on modeling high BMIs as a half-normal distribution.
+bmip and bmiz: These are based on the LMS method for children without obesity and the 'extended' method for children with obesity. See the Wei et al. reference for the 'extended' method, which is based on modeling high BMIs as a half-normal distribution.
 
-bmip95: BMI expressed as percentage of 95th percentile, 120 percent is lower threshold for severe obeseity
+bmip95: BMI expressed as a percentage of 95th percentile, 120 percent is the lower threshold for severe obesity
 
-if 'all = TRUE', then output other BMI metrics describe in Wei et al. paper.  Default is FALSE.  These express BMI as distance or percent distance from the median.  If percent of the median is desired, 100 can be added to the values.
+If  'all = TRUE', the output contains other BMI metrics described in Freedman et al. paper. The default is FALSE. These express BMI as distance or percent distance from the median. If the percent of the median is desired, 100 can be added to the values.
 
 Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm
 
@@ -88,7 +88,7 @@ data = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=FALSE); # if default=T
 
 round(data,2)
 
-setDF(data) # to convert to a dataframe
+setDF(data) # to convert to a data frame
 
 OR data = cdcanthro(data, agem, wtk, htc, bmi);
 
@@ -101,3 +101,4 @@ nhanes  = nhanes[!is.na(bmi)]  # exclude subjects with missing wt/ht
 nhanes$agemos = nhanes$agemos + 0.5   # because agemos is completed number of months
 
 data = cdcanthro(nhanes, agemos, wt, ht, bmi, all=TRUE)
+![image](https://user-images.githubusercontent.com/104166206/191998119-a8fba97d-40f8-42bd-a1aa-56120b431caf.png)
