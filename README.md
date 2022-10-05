@@ -12,7 +12,7 @@ The BMI metrics included z-scores and percentiles based on the growth charts and
 Run the following command in R:
 
 install.packages(
-   'https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.1.tar.gz', repos=NULL
+   'https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.1.tar.gz', type='source', repos=NULL
  )
 
 ### Usage
