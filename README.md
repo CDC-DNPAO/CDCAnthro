@@ -1,4 +1,4 @@
-<h1 align=center> cdcanthro: CDC ANTHROpometry values </h1>
+<h2 align=center> cdcanthro: CDC ANTHROpometry values </h2>
 GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC GROWTH CHARTS (non-obese children) AND FROM THE ‘EXTENDED METHOD’ (children with obesity)
 
 
