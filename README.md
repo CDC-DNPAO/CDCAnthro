@@ -48,7 +48,7 @@ For additional information on age, see information on agemos at https://www.cdc.
 
 If all=TRUE, all variables in Freedman et al. paper (Freedman et al., 2019) will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution. Default is FALSE
 
-The calculation of BMI z-scores for children without obesity is Z = (((BMI/M) ^ L) -1) / (L*S) where BMI is the child’s BMI, L is Box-Cox transformation for normality for the child’s sex and age, M is median, and S is coefficient of variation.  Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm (Centers for Disease Control and Prevention (CDC), 2022)
+The calculation of BMI z-scores for children without obesity is Z = (((BMI / M) ^ L) -1) / (L*S) where BMI is the child’s BMI, L is Box-Cox transformation for normality for the child’s sex and age, M is median, and S is coefficient of variation.  Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm (Centers for Disease Control and Prevention (CDC), 2022)
 
 For children with obesity, BMI percentiles are calculated as  90 + 10*pnorm((BMI - p95) / sigma) where p95 is the sex-and age-specific 95th percentile, and sigma is the scale distribution of the half-normal distribution.
 
