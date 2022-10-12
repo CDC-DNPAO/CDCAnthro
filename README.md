@@ -6,7 +6,7 @@ GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC 
 
 Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts (Kuczmarski et al., 2002), BMI metrics proposed at a 2018 meeting (Freedman et al., 2019), and extended z-scores and percentiles for children with obesity (Wei et al., 2020). It has a single function, 'cdcanthro'. Requires the package data.table (≥ 1.13) to be installed; library(cdcanthro) will attach data.table.
 
-The BMI metrics included z-scores and percentiles based on the growth charts and newer metrics that more accurately characterize BMIs above the CDC 97th percentile. Note that the output variables - bmiz and bmip - are based on a combination of the LMS-based z-scores (Cole and Green, 1992; Centers for Disease Control and Prevention (CDC), 2022) for children without obesity and extended bmiz and extended bmip for children with obesity.  The LMS-based z-scores/percentiles are named 'original_bmiz' and 'original_bmip'.
+The BMI metrics included z-scores and percentiles based on the growth charts and newer metrics that more accurately characterize BMIs above the CDC 97th percentile. Note that the output variables - bmiz and bmip - are based on a combination of the LMS-based z-scores (Cole and Green, 1992; Centers for Disease Control and Prevention (CDC), 2022) for children without obesity and extended bmiz and extended bmip for children with obesity. The LMS-based z-scores/percentiles are named 'original_bmiz' and 'original_bmip'.
 
 ### Installation
 Run the following command in R:
@@ -38,7 +38,7 @@ ht: height (cm).
 bmi: BMI, kg/m^2.
 
 ### Details
-Expects 'sex' to be a variable in the dataset. Can be coded as either 'boys/girls' or 'male/female' or '1/2'.  Character values can be upper or lower case; only the first character is considered.
+Expects 'sex' to be a variable in the dataset. Can be coded as either 'boys/girls' or 'male/female' or '1/2'.  Character values can be in upper or lower case; only the first character is considered.
 
 Age in months should be given as accurately as possible because the function linearly interpolates between ages. If only the completed number of months is known (e.g., NHANES), add 0.5. If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641.
 
@@ -47,6 +47,11 @@ Weight is in kg, and ht is in cm. BMI is kg/m^2.
 For additional information on age, see information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm (A SAS Program for the 2000 CDC Growth Charts (ages 0 to <20 years), 2022)
 
 If all=TRUE, all variables in Freedman et al. paper (Freedman et al., 2019) will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution. Default is FALSE
+
+The calculation of BMI z-scores for children without obesity is Z = (((BMI/M) ^ L) -1) / (L*S) where BMI is the child’s BMI, L is Box-Cox transformation for normality for the child’s sex and age, M is median, and S is coefficient of variation.  Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm (Centers for Disease Control and Prevention (CDC), 2022)
+
+For children with obesity, BMI percentiles are calculated as  90 + 10*pnorm((BMI - p95) / sigma) where p95 is the sex-and age-specific 95th percentile, and sigma is the scale distribution of the half-normal distribution.
+
 
 ### Return Value
 
@@ -63,8 +68,6 @@ bmip and bmiz: These are based on the LMS method for children without obesity an
 bmip95: BMI expressed as a percentage of 95th percentile, 120 percent is the lower threshold for severe obesity
 
 If  'all = TRUE', the output contains other BMI metrics described in Freedman et al. paper. The default is FALSE. These express BMI as distance or percent distance from the median. If the percent of the median is desired, 100 can be added to the values.
-
-Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm (Centers for Disease Control and Prevention (CDC), 2022)
 
 Author(s): David Freedman
 
@@ -105,3 +108,4 @@ nhanes  = nhanes[!is.na(bmi)]  # exclude subjects with missing wt/ht
 nhanes$agemos = nhanes$agemos + 0.5   # because agemos is completed number of months
 
 data = cdcanthro(nhanes, agemos, wt, ht, bmi, all=TRUE)
+
