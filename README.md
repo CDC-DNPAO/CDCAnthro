@@ -27,7 +27,7 @@ The default for 'all' is FALSE - See Details
 
 cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
 
-#### Do NOT put arguments in quotation marks, such as cdcanthro(data, 'age', 'wt', 'ht', 'bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi)
+#### Do NOT put arguments in quotation marks, such as cdcanthro(data, 'age', 'wt', 'ht', 'bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi).  Also note that the sex of the child will be based on your 'sex' variable in the data; don't try to put sex into the funtion call.
 
 Arguments:
 
