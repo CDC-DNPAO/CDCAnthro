@@ -3,7 +3,7 @@ Title: Calculate various z-scores, percentiles, etc. from the CDC growth charts
 Version: 0.1.1
 # Author: David Freedman [aut, cre]
 Authors@R: c(person("David", "Freedman", role = c("aut", "cre"), email = "dxf1@cdc.gov"))
-# Maintainer: David Freedman <dxf1@cdc.gov>
+# Maintainer: David Freedman <davidsfreedman@outlook.com>
 Depends: R (>= 3.1.0), data.table (>= 1.13.0) 
 License: GPL (>=2)
 Description: Calculate many of the newer metrics discussed at the Feb 2018 meeting, 
