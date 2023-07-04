@@ -59,7 +59,7 @@ For children with obesity, BMI percentiles are calculated as  90 + 10*pnorm((BMI
 
 ### Return Value
 
-Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a data frame with 'setDF(output_data)'.  Note that extended BMIz is obtained by taking the inverse CDF of a normal distribution (qnorm(n)).  If 'n' is very close to 1, such as 1 - 1e-17, the result will be 'Inf'.  The function converts these values to a z-score of 8.21. 
+Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a data frame with 'setDF(output_data)'.  
 
 #### Variables in output:
 
@@ -67,7 +67,7 @@ waz, haz, bmiz: CDC –for-age z-scores for Weight, Height, and BMI
 
 mod_waz, mod_haz, mod_bmiz: modified z-scores
 
-bmip and bmiz: These are based on the LMS method for children without obesity and the 'extended' method for children with obesity. See the Wei et al. (Wei et al., 2020) for the 'extended' method, which is based on modeling high BMIs as a half-normal distribution.
+bmip and bmiz: These are based on the LMS method for children without obesity and the 'extended' method for children with obesity. See Wei et al. (Wei et al., 2020) for the 'extended' method, which is based on modeling high BMIs as a half-normal distribution.  Note that extended BMIz is obtained by taking the inverse CDF of a normal distribution (qnorm(n)).  If 'n' is very close to 1, such as 1 - 1e-17, the result will be 'Inf'.  The function converts these values to a z-score of 8.21. 
 
 bmip95: BMI expressed as a percentage of 95th percentile, 120 percent is the lower threshold for severe obesity
 
