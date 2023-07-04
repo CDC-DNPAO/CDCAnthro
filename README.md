@@ -59,7 +59,7 @@ For children with obesity, BMI percentiles are calculated as  90 + 10*pnorm((BMI
 
 ### Return Value
 
-Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a data frame with 'setDF(output_data)'.
+Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a data frame with 'setDF(output_data)'.  Note that extended BMIz is obtained by taking the inverse CDF of a normal distribution (qnorm(n)).  If 'n' is very close to 1, such as 1 - 1e-17, the result will be 'Inf'.  The function converts these values to a z-score of 8.21. 
 
 #### Variables in output:
 
