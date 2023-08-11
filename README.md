@@ -16,7 +16,7 @@ Run the following commands -
 ```r
 install.packages("remotes")
 
-remotes::install_github("beansrowning/CDCAnthro")
+remotes::install_github("CDC-DNPAO/CDCAnthro")
 ```
 
 ### Usage
