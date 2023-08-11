@@ -13,11 +13,11 @@ The calculations and output variables are similar to those in the SAS program at
 ### Installation
 Run the following commands -
 
-install.packages('data.table') # if not already installed
+```r
+install.packages("remotes")
 
-install.packages(
-   'https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.1.tar.gz', type='source', repos=NULL
- )
+remotes::install_github("CDC-DNPAO/CDCAnthro")
+```
 
 ### Usage
 
