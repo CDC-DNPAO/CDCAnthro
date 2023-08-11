@@ -16,7 +16,7 @@ Run the following commands -
 ```r
 install.packages("remotes")
 
-remotes::install_github("beansrowning/CDCAntro")
+remotes::install_github("beansrowning/CDCAnthro")
 ```
 
 ### Usage
