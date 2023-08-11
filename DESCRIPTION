@@ -15,3 +15,4 @@ NeedsCompilation: no
 Packaged: 2023-06-28 18:16:15 UTC; davidfreedman
 Author: David Freedman [aut, cre]
 Maintainer: David Freedman <dxf1@cdc.gov>
+RoxygenNote: 7.2.3

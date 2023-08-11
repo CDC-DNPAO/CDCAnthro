@@ -28,6 +28,72 @@ cz_score <- function(var, l, m, s) { # LMS formula with modified (m) z-scores
    list(z, mz)
 }
 
+#' @title Generate Sex- And Age-Standardized Weight, Height, and BMI Metrics from the CDC Growth Charts
+#' @description 
+#' Generate z-scores, percentiles, and other metrics for weight, height, and BMI based on the 2000 CDC growth charts.
+#' Has a single function, 'cdcanthro'.  Requires the package data.table to be
+#' installed; library(cdcanthro) will also attach data.table.
+#' 
+#' The BMI metrics included z-scores and percentiles base on the growth charts, along with various newer metrics such as extended BMIz,
+#' percent of the 50th and 95th percentiles.
+#' @param data data.frame or data.table
+#' @param age name of column in `data` coding age in months, specified as accurately as possible
+#' @param wt name of column in `data` coding for weight in kilograms
+#' @param ht name of column in `data` coding for height in centimeters
+#' @param bmi name of column in `data` coding for BMI (kg/m^2)
+#' @param all (default: FALSE) Include all variables from Wei et al.?
+#' 
+#' @return 
+#' Returns a data.table containing the original data and various weight, height, and BMI metrics.  Can convert this to a dataframe with 'setDF(output_data)'.
+#' 
+#' Variables in output:
+#' waz, haz, bmiz: CDC --for-age z-scores for Weight, Height, and BMI. BMIz is based on 2000 CDC growth charts (non-obese children) and extended BMIz (obese children)
+#' 
+#' mod_waz, mod_haz, mod_bmiz: modified z-scores
+#' 
+#' ext_bmip and ext_bmiz: extended BMI percentile and z-score.  See note to BMIz
+#' 
+#' pre_2022_bmiz and pre_2022_bmip:  orignal calculations of BMIz and BMI percentile
+#' 
+#' bmip95: BMI expressed as percentage of 95th percentile, 120 percent is lower threshold for severe obeseity
+#' 
+#' if 'all = TRUE', then output other BMI metrics describe in Wei et al. paper. Default is FALSE.  
+#' These express BMI as distance or percent distance from the median.  
+#' If percent of the median is desired, 100 can be added to the values.
+#' 
+#' @section References:
+#' Kuczmarski RJ, Ogden CL, Guo SS, Grummer-Strawn LM, Flegal KM, Mei Z, et al. 2000 CDC Growth Charts for the United States: methods and development. Vital and Health Statistics Series 11, Data from the National Health Survey 2002;11:1–190.
+#' 
+#' Wei R, Ogden CL, Parsons VL, Freedman DS, Hales CM. A method for calculating BMI z-scores and percentiles above the 95th percentile of the CDC growth charts. Annals of Human Biology 2020;47:514–21. [https://doi.org/10.1080/03014460.2020.1808065](https://doi.org/10.1080/03014460.2020.1808065).
+#' 
+#' Freedman DS, Woo JG, Ogden CL, Xu JH, Cole TJ. Distance and Percent Distance from Median BMI as Alternatives to BMI z-score. Br J Nutr 2019;124:1–8.
+#' [https://doi.org/10.1017/S0007114519002046](https://doi.org/10.1017/S0007114519002046).
+#'
+#' @note 
+#' Do NOT put arguments in quotation marks, such as cdcanthro(data,'age','wt','ht','bmi').  Use: cdcanthro(data, age, wt, ht, bmi)
+#'
+#' Reference data are the merged LMS data files at [https://www.cdc.gov/growthcharts/percentile_data_files.htm](https://www.cdc.gov/growthcharts/percentile_data_files.htm)
+#' @seealso 
+#' [https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm](https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm)
+#' @examples 
+#' data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
+#' data$bmi = data$wtk / (data$htc/100)^2;
+#' data = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi);
+#' # OR data = cdcanthro(data, agem, wtk, htc, bmi);
+#' round(data,2)
+#' # setDF(data) to convert to a dataframe
+#' 
+#' nhanes   # NHANES data (2015/16 and 2017/18)
+#' nhanes  = nhanes[!is.na(bmi),] # exclude subjects with missing wt/ht
+#' nhanes$agemos = nhanes$agemos + 0.5   # because agemos is completed number of months
+#' data = cdcanthro(nhanes, age=agemos, wt, ht, bmi, all=TRUE)
+#' #OR data = cdcanthro(nhanes, agemos, wt, ht, bmi, all=TRUE)
+#' round(data, 2)
+#' @export
+#' @md
+#' @encoding UTF-8
+#' @import data.table
+#' @importFrom stats approx pnorm qnorm sigma
 cdcanthro <- function(data, age = age_in_months,
                       wt = weight_kg, ht = height_cm, bmi = bmi,
                       all = FALSE) {
