@@ -41,7 +41,7 @@ cdcanthro <- function(data, age=age_in_months,
 
    if (class(data)[1]=='data.frame') setDT(data)
    if (is.na(match("sex", names(data)))) {
-      stop ("There must be a variable named 'sex' in your data")
+      stop ("There must be a variable named 'sex' (lower case) in your data")
    }
 
    data[, seq_ := seq_len(.N)]
