@@ -23,6 +23,8 @@ install.packages(
 
 cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi, all = FALSE)
 
+[Note that sex is not an argument - see the Details section.]
+
 The default for 'all' is FALSE - See Details
 
 cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
