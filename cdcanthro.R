@@ -1,6 +1,6 @@
 
 # to go from bz to bmi: M*(1 +L*S*z))^(1/L);
-# to go from ebz to bmi: p95 + qnorm(((100*pnorm(ext.z) - 90)/10)) * sigma
+# to go from extended bz to bmi: p95 + qnorm(((100*pnorm(ext.z) - 90)/10)) * sigma
 
 cc <- function (...) as.character(sys.call()[-1])
 
@@ -68,10 +68,10 @@ cdcanthro <- function(data, age=age_in_months,
    data <- data[between(age,24,240) & !(is.na(wt) & is.na(ht)),
                     .(seq_, sexn,age,wt,ht,bmi)];
 
-   # 'dref' is CDCref_d.csv,  https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
+   # 'ref_data' is CDCref_d.csv,  https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
    dref <- ref_data[`_AGEMOS1`>23 & denom=='age']
-   names(dref) <- tolower(names(dref))
-   names(dref) <- gsub('^_', '', names(dref))
+   setnames(dref, tolower(names(dref)))
+   setnames(dref, gsub('^_', '', names(dref)))
    setnames(dref,'sex','sexn')
 
    # values at 240.0 months: https://www.cdc.gov/growthcharts/percentile_data_files.htm
@@ -99,7 +99,7 @@ cdcanthro <- function(data, age=age_in_months,
       dg <- dref[sexn==2]
            fapp <- function(v,...)approx(dg$age,v,xout=uages)$y
            dg <- sapply(dg[,..v],fapp)
-      dref <- setDT(data.frame(rbind(db,dg)))
+      dref <- as.data.table(data.frame(rbind(db,dg)))
    }
 
    du <- unique(data[,.(sexn,age)],by=c('sexn','age'))
@@ -112,7 +112,7 @@ cdcanthro <- function(data, age=age_in_months,
    dt[,c('haz', 'mod_haz'):= cz_score(ht, hl, hm, hs)]
    dt[,c('bz', 'mod_bmiz'):= cz_score(bmi, bl, bm, bs)]
 
-   setDT(dt);  setnames(dt,c('bl','bm','bs'),c('bmi_l','bmi_m','bmi_s'))
+   as.data.table(dt);  setnames(dt,c('bl','bm','bs'),c('bmi_l','bmi_m','bmi_s'))
    dt[,c('wl','wm','ws','hl','hm','hs'):=NULL]
 
    dt[,':=' (
