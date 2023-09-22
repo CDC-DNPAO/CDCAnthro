@@ -42,7 +42,7 @@ ht: height (cm).
 bmi: BMI, kg/m^2.
 
 ### Details
-Expects the child's sex to be named 'sex', 'Sex', or 'SEX' to be a variable in the dataset. Only 1 of these 3 variables can be in the data.  Values can be coded as either 'boys/girls' or 'male/female' or '1/2'.  Character values can be in upper or lower case; only the first character is considered.
+Expects the child's sex to be named 'sex', 'Sex', or 'SEX' in the data. Only 1 of these 3 variables can be in the data.  Values can be coded as 'boys/girls', 'b/g', 'male/female', 'm/f', or '1/2'.  Character values can be in upper or lower case; only the first character is considered.
 
 Age in months should be given as accurately as possible because the function linearly interpolates between ages. If only the completed number of months is known (e.g., NHANES), add 0.5. If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641.
 
