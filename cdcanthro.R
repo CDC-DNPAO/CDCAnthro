@@ -50,7 +50,7 @@ cdcanthro <- function(data, age=age_in_months,
       stop ("A child's sex can named 'sex', 'SEX', or 'Sex'. There can be only
               1 of these 3 variables in your data")
    }
-   names(data)[which(names(data)==nms)] <- 'sex'
+   if (nms!='sex') {names(data)[which(names(data)==nms)] <- 'sex'}
 
    data$age <- data[[deparse(substitute(age))]]
    data$wt <- data[[deparse(substitute(wt))]]
