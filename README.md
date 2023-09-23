@@ -2,7 +2,7 @@
 GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC GROWTH CHARTS (non-obese children) AND FROM THE ‘EXTENDED METHOD’ (children with obesity)
 
 ### News
-9/23/23: The function now recognizes 'sex', 'SEX' or 'Sex' as names for the child's sex.  It also provides informative errors if one of these variables is not in your data.
+9/23/23. The function now recognizes 'sex', 'SEX' or 'Sex' as names for the child's sex.  It also provides informative errors if one of these variables is not in your data.
 
 ### Description
 
