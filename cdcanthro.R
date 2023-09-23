@@ -36,7 +36,8 @@ cdcanthro <- function(data, age=age_in_months,
       bmiz <- l <- m <- s <- waz <- haz <- z1 <- z0 <- p95 <- bmip <-
       '_AGEMOS1' <- ebp <- ebz <- agemos <- agemos1 <- agemos2 <-
       sexn <- bmi_l <- bmi_s <- bmi_m <- wl <- wm <- wm <- hl <- hm <- hs <-
-      bl <- bm <- bs <- ws <- nms <- mod_bmiz <- mod_waz <- mod_haz <- NULL
+      bl <- bm <- bs <- ws <- nms <- mod_bmiz <- mod_waz <- mod_haz <-
+      hap <- wap <- NULL
    # due to NSE notes in R CMD check
 
    if (class(data)[1]=='data.frame') setDT(data)
@@ -44,17 +45,12 @@ cdcanthro <- function(data, age=age_in_months,
    data[, seq_ := seq_len(.N)]
    dorig <- copy(data)
 
-   nms <- names(data)
-   if (length(grep('^sex$|^Sex$|^SEX$', nms)) != 1) {
-      stop ("A child's sex can named 'sex', 'SEX', or 'Sex'. Further, there can be only
-              one of these 3 variables in your data")
+   nms <- grep('^sex$',names(data),ignore.case = TRUE, value = TRUE)
+   if (length(nms) != 1) {
+      stop ("A child's sex can named 'sex', 'SEX', or 'Sex'. There can be only
+              1 of these 3 variables in your data")
    }
-   if (is.na(match('sex', nms)) & 'SEX' %in% nms) {setnames(data,'SEX','sex')}
-   if (is.na(match('sex', nms)) & 'Sex' %in% nms) {setnames(data,'Sex','sex')}
-
-   if (is.na(match("sex", names(data)))) {
-      stop ("There must be a variable named 'sex', 'Sex', or 'SEX' in your data")
-   }
+   names(data)[which(names(data)==nms)] <- 'sex'
 
    data$age <- data[[deparse(substitute(age))]]
    data$wt <- data[[deparse(substitute(wt))]]
