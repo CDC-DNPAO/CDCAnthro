@@ -95,7 +95,7 @@ Wei, R. et al. (2020) ‘A method for calculating BMI z-scores and percentiles a
 
 ### Examples
 
-data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
+data = expand.grid(SEX=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144)); # note that 'sex' would be fine
 
 data$bmi = data$wtk / (data$htc/100)^2;
 
