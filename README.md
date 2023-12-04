@@ -56,7 +56,7 @@ For additional information on age, see information on agemos at https://www.cdc.
 
 If all=TRUE, all variables in Freedman et al. (2019) paper will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution. Default is FALSE
 
-The calculation of BMI z-scores for children without obesity is Z = (((BMI / M) ^ L) -1) / (L*S) where BMI is the child’s BMI, L is Box-Cox transformation for normality for the child’s sex and age, M is median, and S is coefficient of variation.  Reference data are the merged LMS data files at https://www.cdc.gov/growthcharts/percentile_data_files.htm (Centers for Disease Control and Prevention (CDC), 2022).  Values of sigma for children with obesity are based on formulas in the Wei et al. (2020) paper.
+The calculation of BMI z-scores for children without obesity is Z = (((BMI / M) ^ L) -1) / (L*S) where BMI is the child’s BMI, L is Box-Cox transformation for normality for the child’s sex and age, M is median, and S is coefficient of variation.  Reference data are the merged LMS files at https://www.cdc.gov/growthcharts/percentile_data_files.htm (Centers for Disease Control and Prevention (CDC), 2022).  Values of sigma for children with obesity are based on formulas in the Wei et al. (2020) paper.
 
 For children with obesity, BMI percentiles are calculated as  90 + 10*pnorm((BMI - p95) / sigma) where p95 is the sex-and age-specific 95th percentile, and sigma is the scale distribution of the half-normal distribution.
 
@@ -71,11 +71,11 @@ waz, haz, bmiz: CDC –for-age z-scores for Weight, Height, and BMI
 
 mod_waz, mod_haz, mod_bmiz: modified z-scores
 
-bmip and bmiz: These are based on the LMS method for children without obesity and the 'extended' method for children with obesity. See Wei et al. (2020) for the 'extended' method, which is based on modeling high BMIs as a half-normal distribution.  Note that extended BMIz is obtained by taking the inverse CDF of a normal distribution (qnorm(n)).  If 'n' is very close to 1, such as 1 - 1e-17, the result will be 'Inf'.  The function converts these values to a z-score of 8.21. 
+bmip and bmiz: CDC BMI percentile and z-score. These are based on the LMS method for children without obesity and the 'extended' method for children with obesity. See Wei et al. (2020) for the 'extended' method based on modeling high BMIs as a half-normal distribution.  Extended BMIz is obtained by taking the inverse CDF of a normal distribution (qnorm(value)).  If 'value' is extremely close to 1, such as 1 - 1e-17, the result will be 'Inf'.  The function converts these values to a z-score of 8.21. 
 
 bmip95: BMI expressed as a percentage of 95th percentile, 120 percent is the lower threshold for severe obesity
 
-If  'all = TRUE', the output contains other BMI metrics described in Freedman et al. paper. The default is FALSE. These express BMI as distance or percent distance from the median. If the percent of the median is desired, 100 can be added to the values.
+If  'all = TRUE', the output contains other BMI metrics described in the paper by Freedman et al. The default is FALSE. These express BMI as distance or percent distance from the median. If the percent of the median is desired, 100 can be added to the values.
 
 Author(s): David Freedman
 
