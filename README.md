@@ -37,7 +37,7 @@ Arguments:
 
 data: data frame or data.table
 
-age: age in months specified as accurately as possible.
+age: age in months specified as accurately as possible.  If age is given as the completed number of months (as in NHANES), add 0.5. If age is given in days, divide by 30.4375.
 
 wt: weight (kg).
 
