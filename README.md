@@ -50,7 +50,7 @@ Age in months should be given as accurately as possible because the function lin
 
 Weight is in kg, and ht is in cm. BMI is kg/m^2.
 
-For additional information on age, see information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm (A SAS Program for the 2000 CDC Growth Charts (ages 0 to <20 years), 2022)
+For additional information on age, see the information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm (A SAS Program for the 2000 CDC Growth Charts (ages 0 to <20 years), 2022)
 
 If all=TRUE, all variables in Freedman et al. (2019) paper will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution. Default is FALSE
 
