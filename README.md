@@ -117,5 +117,4 @@ nhanes  = nhanes[!is.na(bmi)]  # exclude subjects with missing wt/ht
 
 nhanes$agemos = nhanes$agemos + 0.5   # because agemos is completed number of months
 
-data = cdcanthro(nhanes, agemos, wt, ht, bmi, all=TRUE)
-
+data = cdcanthro(nhanes, agemos, wt, ht, bmi, all=TRUE); data
