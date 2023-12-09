@@ -108,7 +108,7 @@ round(out,2)[1:5]
 
 data(NHanes) #NHanes data
 
-NHanes[,agemos := agemos + 0.5] # because agemos is completed number of months. NHames is a data.table
+NHanes[,agemos := agemos + 0.5] # because agemos is completed number of months. NHanes is a data.table
 
 out = cdcanthro(NHanes, agemos, wt, ht, bmi, all=FALSE);
 
