@@ -95,23 +95,21 @@ Kuczmarski, R.J. et al. (2002) ‘2000 CDC Growth Charts for the United States: 
 
 Wei, R. et al. (2020) ‘A method for calculating BMI z-scores and percentiles above the 95th percentile of the CDC growth charts’, Annals of Human Biology, 47(6), pp. 514–521. Available at: https://doi.org/10.1080/03014460.2020.1808065.
 
-### Examples
+### Examples (probably better to see ?cdcantho for examples)
 
 data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
+
 data$bmi = data$wtk / (data$htc/100)^2;
-out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi);
-# OR data = cdcanthro(data, agem, wtk, htc, bmi);
-round(out,2)[1:5]
-# setDF(out) to convert to a dataframe
 
-# results with 'all=TRUE'
-out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=TRUE);
+out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi); # or out = cdcanthro(data, agem, wtk, htc, bmi, all=TRUE);
+
 round(out,2)[1:5]
 
-# run on 2015/16 and 2017/18 NHANES data.  Some kids are missing wt or ht
-NHanes # NHanes data
-data(NHanes)
-NHanes[,agemos := agemos + 0.5]
-# because agemos is completed number of months. NHames is a data.table
+
+data(NHanes) #NHanes data
+
+NHanes[,agemos := agemos + 0.5] # because agemos is completed number of months. NHames is a data.table
+
 out = cdcanthro(NHanes, agemos, wt, ht, bmi, all=FALSE);
+
 round(out,2)
