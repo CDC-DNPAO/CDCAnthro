@@ -74,9 +74,15 @@ cdcanthro <- function(data, age=age_in_months,
    data <- data[between(age,24,240) & !(is.na(wt) & is.na(ht)),
                     .(seq_, sexn,age,wt,ht,bmi)];
 
-   # 'ref_data' is CDCref_d.csv,  https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm
    # cdc__ref__data <- fread('~/Sync/R/Anal/Growth_Charts/Data/CDCref_d.csv');
-   cdc_ref <- cdc__ref__data[`_AGEMOS1`>23 & denom=='age']
+   # cdc_ref <- cdc__ref__data[`_AGEMOS1`>23 & denom=='age'] # if in /data
+   cdc_ref <- cdc__ref__data[`_AGEMOS1`>23 & denom=='age'] # if in /data
+
+   # NHanes <- get0("NHanes", envir = asNamespace("cdcanthro")) #sysdata.rda
+   # cdc_ref <- get0("cdc__ref__data", envir = asNamespace("cdcanthro")) #sysdata.rda
+   # https://stackoverflow.com/questions/32964741/accessing-sysdata-rda-within-package-functions
+   # as.data.table(cdc_ref)
+
    setnames(cdc_ref, tolower(names(cdc_ref)))
    setnames(cdc_ref, gsub('^_', '', names(cdc_ref)))
    setnames(cdc_ref,'sex','sexn')
