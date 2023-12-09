@@ -97,24 +97,21 @@ Wei, R. et al. (2020) ‘A method for calculating BMI z-scores and percentiles a
 
 ### Examples
 
-data = expand.grid(SEX=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144)); # note that 'sex' would be fine
-
+data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
 data$bmi = data$wtk / (data$htc/100)^2;
+out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi);
+# OR data = cdcanthro(data, agem, wtk, htc, bmi);
+round(out,2)[1:5]
+# setDF(out) to convert to a dataframe
 
-data = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=FALSE); # if default=TRUE then output all variables in Wei et al. paper
+# results with 'all=TRUE'
+out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=TRUE);
+round(out,2)[1:5]
 
-round(data,2)
-
-setDF(data) # to convert to a data frame
-
-OR data = cdcanthro(data, agem, wtk, htc, bmi);
-
----------------------
-
-nhanes   # NHANES data (2015/16 and 2017/18)
-
-nhanes  = nhanes[!is.na(bmi)]  # exclude subjects with missing wt/ht
-
-nhanes$agemos = nhanes$agemos + 0.5   # because agemos is completed number of months
-
-data = cdcanthro(nhanes, agemos, wt, ht, bmi, all=TRUE); data
+# run on 2015/16 and 2017/18 NHANES data.  Some kids are missing wt or ht
+NHanes # NHanes data
+data(NHanes)
+NHanes[,agemos := agemos + 0.5]
+# because agemos is completed number of months. NHames is a data.table
+out = cdcanthro(NHanes, agemos, wt, ht, bmi, all=FALSE);
+round(out,2)
