@@ -105,18 +105,18 @@ out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi); # OR data = cdcanthro(data
 
 round(out,2)[1:5] # setDF(out) to convert to a dataframe
 
-###  #-------------------
+###  #------------------- results with 'all=TRUE'
+
 
 out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=TRUE);
 
-round(out,2)[1:5] # results with 'all=TRUE'
+round(out,2)[1:5] 
 
-### #-------------------
+### #------------------- another example, BMI is not in dataset
 
 d <- data.table(sex=c(1,2,1,2,2), age=c(141,54,217,155,52),
                 wt=c(57,25,72,72,17.7), ht=c(143,102,166,169,105)
-                
-) # another example, BMI is not in dataset
+                ) 
 
 d[,':=' (age=age+0.5)] # age was give as completed months
 
