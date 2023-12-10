@@ -98,18 +98,21 @@ Wei, R. et al. (2020) ‘A method for calculating BMI z-scores and percentiles a
 ### Examples (probably better to see ?cdcantho for examples)
 
 data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
-
 data$bmi = data$wtk / (data$htc/100)^2;
+out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi);
+# OR data = cdcanthro(data, agem, wtk, htc, bmi);
+round(out,2)[1:5]
+# setDF(out) to convert to a dataframe
 
-out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi); # or out = cdcanthro(data, agem, wtk, htc, bmi, all=TRUE);
-
+# results with 'all=TRUE'
+out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=TRUE);
 round(out,2)[1:5]
 
-
-data(NHanes) #NHanes data
-
-NHanes[,agemos := agemos + 0.5] # because agemos is completed number of months. NHanes is a data.table
-
-out = cdcanthro(NHanes, agemos, wt, ht, bmi, all=FALSE);
-
-round(out,2)
+# another example, BMI is not in dataset
+d <- data.table(sex=c(1,2,1,2,2), age=c(141,54,217,155,52),
+                wt=c(57,25,72,72,17.7), ht=c(143,102,166,169,105)
+)
+d[,':=' (age=age+0.5)] # age was give as completed months
+d
+d <- cdcanthro(d,age,wt,ht) # if BMI is not given, it's based on wt and ht (cm)
+round(d,2)
