@@ -105,7 +105,7 @@ out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi); # OR data = cdcanthro(data
 
 round(out,2)[1:5] # setDF(out) to convert to a dataframe
 
-###  #------------------- results with 'all=TRUE'
+###  ------------------- results with 'all=TRUE'
 
 
 out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=TRUE);
