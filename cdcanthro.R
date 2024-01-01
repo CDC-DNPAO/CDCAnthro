@@ -55,10 +55,11 @@ cdcanthro <- function(data, age=age_in_months,
    data$age <- data[[deparse(substitute(age))]]
    data$wt <- data[[deparse(substitute(wt))]]
    data$ht <- data[[deparse(substitute(ht))]]
+
    if ('bmi' %in% names(data)){
       data$bmi <- data[[deparse(substitute(bmi))]]
    } else {
-      data[,bmi:=wt/ht^2] # wt is in kg
+      data[,bmi:=wt/(ht/100)^2] # wt is in kg
    }
 
    if (('age' %in% names(data)) == FALSE){
@@ -71,7 +72,7 @@ cdcanthro <- function(data, age=age_in_months,
       sexn %in% c(2,'G','F'), 2L
    )]
 
-   data <- data[between(age,24,240) & !(is.na(wt) & is.na(ht)),
+   data <- data[between(age,24,239.9999) & !(is.na(wt) & is.na(ht)),
                     .(seq_, sexn,age,wt,ht,bmi)];
 
    # cdc__ref__data <- fread('~/Sync/R/Anal/Growth_Charts/Data/CDCref_d.csv');
@@ -103,14 +104,13 @@ cdcanthro <- function(data, age=age_in_months,
    v=cc(sexn,age,wl,wm,ws,bl,bm,bs,hl,hm,hs,mref,sref);
    setnames(cdc_ref,v)
 
+   # if ('bmi' %in% names(data)){
+   #    data$bmi <- data[[deparse(substitute(bmi))]]
+   # } else {
+   #    data[,bmi:=wt/(ht/100)^2]
+   # }
 
-   if ('bmi' %in% names(data)){
-      data$bmi <- data[[deparse(substitute(bmi))]]
-   } else {
-      data[,bmi:=wt/(ht/100)^2]
-   }
-
-   # interpolate reference data to match each agemos in input data
+   # interpolate reference data to match each age_month in input data
    uages <- unique(data$age)
    dlen <- length(setdiff(data$age,cdc_ref$age))
    db <- cdc_ref[sexn==1]
@@ -194,7 +194,7 @@ cdcanthro <- function(data, age=age_in_months,
    }
 
    dt <- dt[,..v]
-   if ('bmi' %in% names(dorig)) dorig[,bmi:=NULL]
+   if ('bmi' %in% names(dorig)) dt[,bmi:=NULL]
 
    setkey(dt,seq_); setkey(dorig,seq_)
    dtot <- dt[dorig]
