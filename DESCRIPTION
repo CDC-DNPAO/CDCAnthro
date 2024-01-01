@@ -1,11 +1,11 @@
 Package: cdcanthro
 Title: Calculate various z-scores, percentiles, etc. from the CDC growth charts
-Version: 0.1.1
-# Author: David Freedman [aut, cre]
-Authors@R: c(person("David", "Freedman", role = c("aut", "cre"), email = "davidsfreedman@outlook.com"))
+Version: 0.1.2
+Authors: c(person("David", "Freedman", role = c("aut", "cre"), email = "davidsfreedman at outlook.com"))
+# Maintainer: David Freedman <davidsfreedman at outlook dot com>
 Depends: R (>= 3.1.0), data.table (>= 1.13.0) 
 License: GPL (>=2)
-Description: Calculate many of the newer BMI metrics discussed at the Feb 2018 meeting, 
+Description: Calculate many of the newer metrics discussed at the Feb 2018 meeting, 
     including BMIz and BMI percentiles that use the 'extended' values for obese children. 
 Encoding: UTF-8
 LazyData: true
