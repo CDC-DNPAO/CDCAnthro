@@ -4,7 +4,8 @@ Version: 0.1.2
 Authors: c(person("David", "Freedman", role = c("aut", "cre"), email = "davidsfreedman at outlook.com"))
 Depends: R (>= 3.1.0), data.table (>= 1.13.0) 
 License: GPL (>=2)
-Description: Calculate many of the newer metrics discussed at the Feb 2018 meeting, 
-    including BMIz and BMI percentiles that use the 'extended' values for obese children. 
+Description: Calculate many of the newer metrics proposed for the CDC growth charts 
+    at a Feb 2018 meeting, including BMIz and BMI percentiles bease on the 
+    the 'extended' scale for obese children. 
 Encoding: UTF-8
 LazyData: true
