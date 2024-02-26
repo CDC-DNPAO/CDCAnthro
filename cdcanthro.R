@@ -4,17 +4,6 @@
 
 cc <- function (...) as.character(sys.call()[-1])
 
-set_cols_first <- function (DT, cols, intersection = TRUE) # thanks to hutils
-   {
-       if (intersection) {
-           return(setcolorder(DT, c(intersect(cols, names(DT)),
-               setdiff(names(DT), cols))))
-       }
-       else {
-           return(setcolorder(DT, c(cols, setdiff(names(DT), cols))))
-       }
-   }
-
 cz_score=function(var, l, m, s){ # LMS formula with modified (m) z-scores
       ls=l*s; invl=1/l
       z = (((var/m) ^ l) -1) / (ls) # z-score formula
@@ -142,7 +131,7 @@ cdcanthro <- function(data, age=age_in_months,
    dt[,c('bz', 'mod_bmiz'):= cz_score(bmi, bl, bm, bs)]
 
    # as.data.table(dt);
-   setnames(dt,c('bl','bm','bs'),c('bmi_l','bmi_m','bmi_s'))
+   setnames(dt,cc(bl,bm,bs),cc(bmi_l,bmi_m,bmi_s))
    dt[,c('wl','wm','ws','hl','hm','hs'):=NULL]
 
    dt[,':=' (
@@ -198,7 +187,7 @@ cdcanthro <- function(data, age=age_in_months,
 
    setkey(dt,seq_); setkey(dorig,seq_)
    dtot <- dt[dorig]
-   set_cols_first(dtot,names(dorig))
+   setcolorder(dtot,names(dorig), before=1)
    dtot[,seq_:=NULL]
    return(dtot[])
 }
