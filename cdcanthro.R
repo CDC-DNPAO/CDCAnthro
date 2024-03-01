@@ -187,7 +187,7 @@ cdcanthro <- function(data, age=age_in_months,
 
    setkey(dt,seq_); setkey(dorig,seq_)
    dtot <- dt[dorig]
-   setcolorder(dtot,names(dorig), before=1)
+   setcolorder(dtot,c(names(dorig), names(dt[,seq_:=NULL])))
    dtot[,seq_:=NULL]
    return(dtot[])
 }
