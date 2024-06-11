@@ -7,15 +7,18 @@ cc <- function (...) as.character(sys.call()[-1])
 cz_score=function(var, l, m, s){ # LMS formula with modified (m) z-scores
       ls=l*s; invl=1/l
       z = (((var/m) ^ l) -1) / (ls) # z-score formula
-      sdp2 = (m * (1 + 2*ls) ^ (invl)) - m; # BMI at modified z-score of 2 SDs
+      sdp2 = (m * (1 + 2*ls) ^ (invl)) - m; # BMI at z-score of 2 SDs
       sdm2 = m - (m * (1 - 2*ls) ^ (invl));
       mz=fifelse(var < m, (var - m)/(0.5*sdm2),
                    (var - m)/(sdp2*0.5) )
       list(z, mz)
    }
 
-cdcanthro <- function(data, age=age_in_months,
-                      wt=weight_kg, ht=height_cm, bmi=bmi,
+cdcanthro <- function(data,
+                      age=age_in_months,
+                      wt=weight_kg,
+                      ht=height_cm,
+                      bmi=bmi,
                       all=FALSE)
 {
    age_in_months <- weight <- height <- seq_ <- sex <- agey <- bz <-
@@ -29,7 +32,11 @@ cdcanthro <- function(data, age=age_in_months,
       hap <- wap <- original_bmiz <- original_bmip <-
       perc_median <- NULL
 
+   # if (class(data) %notin% cc(data.frame,data.table)) {
+   #    stop ('Input data must be a data.frame or data.table')
+   # }
    if (class(data)[1]=='data.frame') data <- as.data.table(data)
+
    data[, seq_ := seq_len(.N)]
 
    dorig <- copy(data)
@@ -45,14 +52,17 @@ cdcanthro <- function(data, age=age_in_months,
    data$wt <- data[[deparse(substitute(wt))]]
    data$ht <- data[[deparse(substitute(ht))]]
 
+
+   if (('age' %in% names(data)) == FALSE){
+      stop('There must be an variable for age in months in the data')
+   }
+   if (('wt' %in% names(data)) == FALSE) data$wt <- NA
+   if (('ht' %in% names(data)) == FALSE) data$ht <- NA
+
    if ('bmi' %in% names(data)){
       data$bmi <- data[[deparse(substitute(bmi))]]
    } else {
       data[,bmi:=wt/(ht/100)^2] # wt is in kg
-   }
-
-   if (('age' %in% names(data)) == FALSE){
-      stop('There must be an variable for age in months in the data')
    }
 
    data[,sexn:=toupper(substr(sex,1,1))]
@@ -65,7 +75,6 @@ cdcanthro <- function(data, age=age_in_months,
                     .(seq_, sexn,age,wt,ht,bmi)];
 
    # cdc__ref__data <- fread('~/Sync/R/Anal/Growth_Charts/Data/CDCref_d.csv');
-   # cdc_ref <- cdc__ref__data[`_AGEMOS1`>23 & denom=='age'] # if in /data
    cdc_ref <- cdc__ref__data[`_AGEMOS1`>23 & denom=='age'] # if in /data
 
    # NHanes <- get0("NHanes", envir = asNamespace("cdcanthro")) #sysdata.rda
@@ -92,12 +101,6 @@ cdcanthro <- function(data, age=age_in_months,
    # v=c('sexn','age','wl','wm','ws','bl','bm','bs','hl','hm','hs','mref','sref');
    v=cc(sexn,age,wl,wm,ws,bl,bm,bs,hl,hm,hs,mref,sref);
    setnames(cdc_ref,v)
-
-   # if ('bmi' %in% names(data)){
-   #    data$bmi <- data[[deparse(substitute(bmi))]]
-   # } else {
-   #    data[,bmi:=wt/(ht/100)^2]
-   # }
 
    # interpolate reference data to match each age_month in input data
    uages <- unique(data$age)
