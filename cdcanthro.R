@@ -52,17 +52,14 @@ cdcanthro <- function(data,
    data$wt <- data[[deparse(substitute(wt))]]
    data$ht <- data[[deparse(substitute(ht))]]
 
-
-   if (('age' %in% names(data)) == FALSE){
-      stop('There must be an variable for age in months in the data')
-   }
-   if (('wt' %in% names(data)) == FALSE) data$wt <- NA
-   if (('ht' %in% names(data)) == FALSE) data$ht <- NA
-
    if ('bmi' %in% names(data)){
       data$bmi <- data[[deparse(substitute(bmi))]]
    } else {
       data[,bmi:=wt/(ht/100)^2] # wt is in kg
+   }
+
+   if (('age' %in% names(data)) == FALSE){
+      stop('There must be an variable for age in months in the data')
    }
 
    data[,sexn:=toupper(substr(sex,1,1))]
