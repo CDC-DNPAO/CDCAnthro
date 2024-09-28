@@ -16,7 +16,7 @@ The calculations and output variables are similar to those in the SAS program at
 Run the following command:
 
 install.packages(
-   'https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.2.tar.gz', type='source', repos=NULL
+   'https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.3.tar.gz', type='source', repos=NULL
  )
 
 ### Usage
