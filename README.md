@@ -112,16 +112,16 @@ out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=TRUE);
 
 round(out,2)[1:5] 
 
-### #------------------- another example, BMI is not in dataset
+### #------------------- another example: BMI is not in dataset
 
 d <- data.table(sex=c(1,2,1,2,2), age=c(141,54,217,155,52),
                 wt=c(57,25,72,72,17.7), ht=c(143,102,166,169,105)
                 ) 
 
-d[,age := age+0.5] # age was give as completed months
+d[,age := age+0.5] # because age was given as the completed number of months
 
 d
 
-d <- cdcanthro(d,age,wt,ht) # if BMI is not given, it's based on wt and ht (cm)
+d <- cdcanthro(d, age, wt, ht) # if BMI is not given, it's based on wt (kg) and ht (cm)
 
 round(d,2)
