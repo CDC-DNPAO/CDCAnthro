@@ -118,7 +118,7 @@ d <- data.table(sex=c(1,2,1,2,2), age=c(141,54,217,155,52),
                 wt=c(57,25,72,72,17.7), ht=c(143,102,166,169,105)
                 ) 
 
-d[,age := age+0.5)] # age was give as completed months
+d[,age := age+0.5] # age was give as completed months
 
 d
 
