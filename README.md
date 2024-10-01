@@ -50,11 +50,9 @@ bmi: BMI, kg/m^2.
 ### Details
 The function expects the child's sex to be named 'sex'; either upper- or lower-case is fine. You cannot have both 'SEX' and 'sex' in your data.  Values can be coded as 'boys/girls', 'b/g', 'male/female', 'm/f', or '1/2'.  Character values can be in upper- or lower-case; only the first character is considered.
 
-Age in months should be given as accurately as possible because the function linearly interpolates between ages. If only the completed number of months is known (e.g., NHANES), add 0.5. If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641.
+Age in months should be given as accurately as possible because the function linearly interpolates between ages. If only the completed number of months is known (e.g., NHANES), add 0.5. If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641. For additional information on age, see the information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm (A SAS Program for the 2000 CDC Growth Charts (ages 0 to <20 years), 2022)
 
-Weight is in kg, and ht is in cm. BMI is kg/m^2.
-
-For additional information on age, see the information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm (A SAS Program for the 2000 CDC Growth Charts (ages 0 to <20 years), 2022)
+Weight is in kg, and ht is in cm. BMI is kg/m^2. There should be columns of wt, ht, and BMI values in your dataset, even if all values for 1 or 2 of them are missing.
 
 If all=TRUE, all variables in Freedman et al. (2019) paper will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution. Default is FALSE
 
