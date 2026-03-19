@@ -12,12 +12,10 @@ The BMI metrics included z-scores and percentiles based on the growth charts and
 
 The calculations and output variables are similar to those in the SAS program at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm.  However, using all = 'TRUE' in the function will output additional BMI metrics.
 
-### Installation
-Run the following command:
 
-install.packages(
-   'https://raw.github.com/CDC-DNPAO/CDCAnthro/master/cdcanthro_0.1.3.tar.gz', type='source', repos=NULL
- )
+### Installation
+The package is now on CRAN, so install.packages('cdcanthro')
+
 
 ### Usage
 
