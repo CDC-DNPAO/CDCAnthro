@@ -1,7 +1,7 @@
 <h2 align=center> cdcanthro: CDC ANTHROpometry values </h2>
 GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC GROWTH CHARTS (non-obese children) AND FROM THE ‘EXTENDED METHOD’ (children with obesity)
 
-<h2 Note that as of June 2026, this package is on CRAN: https://cran.r-project.org/package=cdcanthro <h2
+<h2 align=center> Note that as of June 2026, this package is on CRAN: https://cran.r-project.org/package=cdcanthro </h2>
 
 ### News
 Sept 23, 2023. The function now recognizes 'sex', 'SEX' or 'Sex' as names for the child's sex.  It also provides informative errors if one of these variables is not in your data.
