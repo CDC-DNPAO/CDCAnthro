@@ -4,7 +4,7 @@ GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC 
 <h3 align=center> As of June 2026, this package is on CRAN: https://cran.r-project.org/package=cdcanthro </h3>
 
 ### News
-Sept 23, 2023. The function now recognizes 'sex', 'SEX' or 'Sex' as names for the child's sex.  It also provides informative errors if one of these variables is not in your data.
+Sept 23, 2023. The function now recognizes 'sex', 'SEX' or 'Sex' as names for the child's sex.  It also provides informative errors if one of these variables is not in your data.  Also, the output is limited to children whose age in months is >= 24 and < 240; the CDC growth charts apply only to these ages. 
 
 ### Description
 
