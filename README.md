@@ -4,7 +4,7 @@ GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC 
 <h3 align=center> This function is part of the cdcanthro package on CRAN: https://cran.r-project.org/package=cdcanthro </h3>
 
 ### News
-August 31, 2026.  See the function cdc_z in the cdcanthro package on CRAN for more information
+August 31, 2026. See the function cdc_z in the cdcanthro package on CRAN for more information
 
 Sept 23, 2023. The function now recognizes 'sex', 'SEX' or 'Sex' as names for the child's sex.  It also provides informative errors if one of these variables is not in your data.  Also, the output is limited to children whose age in months is >= 24 and < 240; the CDC growth charts apply only to these ages. 
 
@@ -20,108 +20,3 @@ The calculations and output variables are similar to those in the SAS program at
 ### Installation
 The package is now on CRAN, so install.packages('cdcanthro')
 
-
-### Usage
-
-cdcanthro(data, age = age_in_months, wt = weight_kg, ht = height_cm, bmi = bmi, all = FALSE)
-
-[Note that sex is not an argument - see the Details section.]
-
-The default for 'all' is FALSE - See Details
-
-cdcanthro(data, age_in_months, weight_kg, height_cm, bmi)
-
-#### Do NOT put arguments in quotation marks, such as cdcanthro(data, 'age', 'wt', 'ht', 'bmi'). Instead, use cdcanthro(data, age, wt, ht, bmi).  
-
-Also, note that the sex of the child will be based on your 'sex' variable in the data; don't try to put sex into the function call.  
-
-Ensure your workspace has no entry named 'cdc__ref__data' (note the total of 4 underbars).
-
-### Arguments:
-
-data: data frame or data.table
-
-age: age in months specified as accurately as possible.  If age is given as the completed number of months (as in NHANES), add 0.5. If age is given in days, divide by 30.4375.
-
-wt: weight (kg).
-
-ht: height (cm).
-
-bmi: BMI, kg/m^2.
-
-### Details
-The function expects the child's sex to be named 'sex'; either upper- or lower-case is fine. You cannot have both 'SEX' and 'sex' in your data.  Values can be coded as 'boys/girls', 'b/g', 'male/female', 'm/f', or '1/2'.  Character values can be in upper- or lower-case; only the first character is considered.
-
-Age in months should be given as accurately as possible because the function linearly interpolates between ages. If only the completed number of months is known (e.g., NHANES), add 0.5. If age is in days, divide by 30.4375 so that a child who is 3672 days old would have an age in months of 120.641. For additional information on age, see the information on agemos at https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm (A SAS Program for the 2000 CDC Growth Charts (ages 0 to <20 years), 2022)
-
-Weight is in kg, and ht is in cm. BMI is kg/m^2. There should be columns of wt, ht, and BMI values in your dataset, even if all values for 1 or 2 of them are missing.
-
-If all=TRUE, all variables in Freedman et al. (2019) paper will be output. Will also output the L, M, and S values for each child and the value of sigma for the half-normal distribution. Default is FALSE
-
-The calculation of BMI z-scores for children without obesity is Z = (((BMI / M) ^ L) -1) / (L*S) where BMI is the child’s BMI, L is Box-Cox transformation for normality for the child’s sex and age, M is median, and S is coefficient of variation.  Reference data are the merged LMS files at https://www.cdc.gov/growthcharts/percentile_data_files.htm (Centers for Disease Control and Prevention (CDC), 2022).  Values of sigma for children with obesity are based on formulas in the Wei et al. (2020) paper.
-
-For children with obesity, BMI percentiles are calculated as  90 + 10*pnorm((BMI - p95) / sigma) where p95 is the sex-and age-specific 95th percentile, and sigma is the scale distribution of the half-normal distribution.
-
-
-### Return Value
-
-Returns a data.table containing the original data and various weight, height, and BMI metrics. Can convert this to a data frame with 'setDF(output_data)'.  
-
-#### Variables in output:
-
-waz, haz, bmiz: CDC –for-age z-scores for Weight, Height, and BMI
-
-mod_waz, mod_haz, mod_bmiz: modified z-scores
-
-bmip and bmiz: CDC BMI percentile and z-score. These are based on the LMS method for children without obesity and the 'extended' method for children with obesity. See Wei et al. (2020) for the 'extended' method based on modeling high BMIs as a half-normal distribution.  Extended BMIz is obtained by taking the inverse CDF of a normal distribution (qnorm(value)).  If 'value' is extremely close to 1, such as 1 - 1e-17, the result will be 'Inf'.  The function converts these values to a z-score of 8.21. 
-
-bmip95: BMI expressed as a percentage of 95th percentile, 120 percent is the lower threshold for severe obesity
-
-If  'all = TRUE', the output contains other BMI metrics described in the paper by Freedman et al. The default is FALSE. These express BMI as distance or percent distance from the median. If the percent of the median is desired, 100 can be added to the values.
-
-Author(s): David Freedman
-
-### References
-
-A SAS Program for the 2000 CDC Growth Charts (ages 0 to <20 years) (2022). Available at: https://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm (Accessed: 3 October 2022).
-
-Centers for Disease Control and Prevention (CDC) (2022) Percentile data files with LMS values. Available at: http://www.cdc.gov/growthcharts/percentile_data_files.htm (Accessed: 3 October 2022).
-
-Cole, T.J. and Green, P.J. (1992) ‘Smoothing reference centile curves: the LMS method and penalized likelihood.’, Statistics in medicine, 11(10), pp. 1305–19. Available at: https://doi.org/10.1002/sim.4780111005.
-
-Freedman, D.S. et al. (2019) ‘Distance and Percent Distance from Median BMI as Alternatives to BMI z-score’, The British Journal of Nutrition, 124(5 (Special issue on New Anthropometric Cut-offs in Nutrition Research)), pp. 1–8. Available at: https://doi.org/10.1017/S0007114519002046.
-
-Kuczmarski, R.J. et al. (2002) ‘2000 CDC Growth Charts for the United States: methods and development.’, Vital and health statistics. Series 11, Data from the National Health Survey, 11(246), pp. 1–190. Available at: http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12043359.
-
-Wei, R. et al. (2020) ‘A method for calculating BMI z-scores and percentiles above the 95th percentile of the CDC growth charts’, Annals of Human Biology, 47(6), pp. 514–521. Available at: https://doi.org/10.1080/03014460.2020.1808065.
-
-### Examples (probably better to see ?cdcantho for examples)
-
-data = expand.grid(sex=1:2, agem=120.5, wtk=c(30,60), htc=c(135,144));
-
-data$bmi = data$wtk / (data$htc/100)^2;
-
-out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi); # OR data = cdcanthro(data, agem, wtk, htc, bmi);
-
-round(out,2)[1:5] # setDF(out) to convert to a dataframe
-
-###  ------------------- results with 'all=TRUE'
-
-
-out = cdcanthro(data, age=agem, wt=wtk, ht=htc, bmi, all=TRUE);
-
-round(out,2)[1:5] 
-
-### #------------------- another example: BMI is not in dataset
-
-d <- data.table(sex=c(1,2,1,2,2), age=c(141,54,217,155,52),
-                wt=c(57,25,72,72,17.7), ht=c(143,102,166,169,105)
-                ) 
-
-d[,age := age+0.5] # because age was given as the completed number of months
-
-d
-
-d <- cdcanthro(d, age, wt, ht) # if BMI is not given, it's based on wt (kg) and ht (cm)
-
-round(d,2)
