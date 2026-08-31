@@ -1,7 +1,7 @@
 <h2 align=center> cdcanthro: CDC ANTHROpometry values </h2>
 GENERATE SEX- AND AGE-STANDARDIZED WEIGHT, HEIGHT, AND BMI METRICS FROM THE CDC GROWTH CHARTS (non-obese children) AND FROM THE ‘EXTENDED METHOD’ (children with obesity)
 
-<h3 align=center> This function is part of the cdcanthr package on CRAN: https://cran.r-project.org/package=cdcanthro </h3>
+<h3 align=center> This function is part of the cdcanthro package on CRAN: https://cran.r-project.org/package=cdcanthro </h3>
 
 ### News
 August 31, 2026.  See the function cdc_z in the cdcanthro package on CRAN for more information
